@@ -15,11 +15,7 @@ namespace SacramentPlanner.Models
     {
         public int id { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-d-MMd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date")]
-        public DateTime hymnDate { get; set; }
+        public int MeetingProgramID { get; set; }
 
         [Required]
         [Display(Name = "Number")]

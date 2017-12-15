@@ -1,0 +1,45 @@
+﻿@model SacramentPlanner.Models.MeetingProgram
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MeetingProgram</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.programDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.programDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Conduct)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Conduct)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Preside)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Preside)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sacrament)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sacrament)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

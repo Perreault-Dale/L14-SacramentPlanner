@@ -16,14 +16,14 @@ namespace SacramentPlanner.Data
         public DbSet<Hymn> Hymns { get; set; }
         public DbSet<Talk> Talks { get; set; }
         public DbSet<Prayer> Prayers { get; set; }
-        public DbSet<Program> Programs { get; set; }
+        public DbSet<MeetingProgram> Programs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Hymn>().ToTable("Hymn");
             modelBuilder.Entity<Talk>().ToTable("Talk");
             modelBuilder.Entity<Prayer>().ToTable("Prayer");
-            modelBuilder.Entity<Program>().ToTable("Program");
+            modelBuilder.Entity<MeetingProgram>().ToTable("MeetingProgram");
         }
     }
 }

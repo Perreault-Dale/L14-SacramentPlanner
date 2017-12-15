@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SacramentPlanner.Models
 {
-    public class Program
+    public class MeetingProgram
     {
         public int id { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-dd-MM}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date")]
         public DateTime programDate { get; set; }
 

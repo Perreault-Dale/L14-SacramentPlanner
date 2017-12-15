@@ -1,0 +1,138 @@
+﻿@model SacramentPlanner.Models.MeetingProgram
+@{
+    ViewData["Title"] = "Details";
+}
+<h2>Details</h2>
+<div>
+    <h4>Program for @Html.DisplayFor(model => model.programDate)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Conduct)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Conduct)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Preside)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Preside)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sacrament)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sacrament)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Prayers)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Offered By</th>
+                    <th>Prayer</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Prayers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.speaker)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.location)
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Prayers" asp-action="Details" asp-route-id="@item.id">Details</a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Prayers" asp-action="Edit" asp-route-id="@item.id">Edit</a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Prayers" asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hymns)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Hymns)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hymnNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.location)
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Hymns" asp-action="Details" asp-route-id="@item.id">Details</a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Hymns" asp-action="Edit" asp-route-id="@item.id">Edit</a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Hymns" asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Talks)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Talks)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.speaker)
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Talks" asp-action="Details" asp-route-id="@item.id">Details</a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Talks" asp-action="Edit" asp-route-id="@item.id">Edit</a>
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Talks" asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Index">Back to List</a> | 
+    <a asp-area="" asp-controller="Hymns" asp-action="Create" asp-route-id="@Model.id">Add Hymn</a> |
+    <a asp-area="" asp-controller="Talks" asp-action="Create" asp-route-id="@Model.id">Add Talk</a> |
+    <a asp-area="" asp-controller="Prayers" asp-action="Create" asp-route-id="@Model.id">Add Prayer</a>
+</div>

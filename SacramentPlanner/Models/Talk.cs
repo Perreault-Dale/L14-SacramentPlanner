@@ -12,11 +12,7 @@ namespace SacramentPlanner.Models
 
         public int id { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-dd-MM}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date")]
-        public DateTime talkDate { get; set; }
+        public int MeetingProgramID { get; set; }
 
         [Required]
         [StringLength(50)]
