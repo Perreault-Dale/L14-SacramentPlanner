@@ -1,124 +1,35 @@
 ﻿@model SacramentPlanner.Models.MeetingProgram
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Print";
 }
-<h2>Details</h2>
+<h2>Print</h2>
 <div>
     <h4>Program for @Html.DisplayFor(model => model.programDate)</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Conduct)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Conduct)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Preside)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Preside)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Sacrament)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sacrament)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Prayers)
-        </dt>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Offered By</th>
-                    <th>Prayer</th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model.Prayers)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.speaker)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.location)
-                        </td>
-                        <td>
-                            <a asp-area="" asp-controller="Prayers" asp-action="Details" asp-route-id="@item.id">Details</a> | 
-                            <a asp-area="" asp-controller="Prayers" asp-action="Edit" asp-route-id="@item.id">Edit</a> | 
-                            <a asp-area="" asp-controller="Prayers" asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </table>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Hymns)
-        </dt>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Number</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model.Hymns)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hymnNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.location)
-                        </td>
-                        <td>
-                            <a asp-area="" asp-controller="Hymns" asp-action="Details" asp-route-id="@item.id">Details</a> | 
-                            <a asp-area="" asp-controller="Hymns" asp-action="Edit" asp-route-id="@item.id">Edit</a> | 
-                            <a asp-area="" asp-controller="Hymns" asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </table>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Talks)
-        </dt>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>Topic</th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model.Talks)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.speaker)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.topic)
-                        </td>
-                        <td>
-                            <a asp-area="" asp-controller="Talks" asp-action="Details" asp-route-id="@item.id">Details</a> | 
-                            <a asp-area="" asp-controller="Talks" asp-action="Edit" asp-route-id="@item.id">Edit</a> | 
-                            <a asp-area="" asp-controller="Talks" asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </table>
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Conduct)</dt><dd>@Html.DisplayFor(model => model.Conduct)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Preside)</dt><dd>@Html.DisplayFor(model => model.Preside)</dd>
+        <dt>Opening Hymn</dt>
+        <dd>@Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Opening).hymnNumber) - 
+        @Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Opening).name)</dd>
+        <dt>Invocation</dt><dd>@Html.DisplayFor(model => model.Prayers.FirstOrDefault(prayer => prayer.location == PrayerLocation.Invocation).speaker)</dd>
+        <dt>Announcements</dt><dd>@Html.DisplayFor(model => model.Conduct)</dd>
+        @if (Model.Sacrament == true) { <dt>Sacrament Hymn</dt><dd>@Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Sacrament).hymnNumber) -
+        @Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Sacrament).name)</dd> }
+        @if (Model.Sacrament == true) { <dt>Sacrament</dt><dd>Administered By Aaronic Priesthood</dd> }
+        <dt>Speaker</dt><dd>@Html.DisplayFor(model => model.Talks.FirstOrDefault(talk => talk.order == 1).speaker)</dd>
+        @if (Model.Talks.Count() > 2 && Model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Intermediate) != null) { <dt>Speaker</dt><dd>@Html.DisplayFor(model => model.Talks.FirstOrDefault(talk => talk.order == 2).speaker)</dd>
+            <dt>Intermediater Hymn</dt><dd>@Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Intermediate).hymnNumber) -
+            @Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Intermediate).name)</dd>}
+        @if (Model.Talks.Count() > 2) { <dt>Speaker</dt><dd>@Html.DisplayFor(model => model.Talks.FirstOrDefault(talk => talk.order == 3).speaker)</dd> }
+        else { <dt>Speaker</dt><dd>@Html.DisplayFor(model => model.Talks.FirstOrDefault(talk => talk.order == 2).speaker)</dd> }
+        <dt>Closing Hymn</dt><dd>@Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Closing).hymnNumber) -
+        @Html.DisplayFor(model => model.Hymns.FirstOrDefault(Hymn => Hymn.location == HymnLocation.Closing).name)</dd>
+        <dt>Invocation</dt><dd>@Html.DisplayFor(model => model.Prayers.FirstOrDefault(prayer => prayer.location == PrayerLocation.Benediction).speaker)</dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
     <a asp-action="Index">Back to List</a> | 
-    <a asp-area="" asp-controller="Hymns" asp-action="Create" asp-route-id="@Model.id">Add Hymn</a> |
-    <a asp-area="" asp-controller="Talks" asp-action="Create" asp-route-id="@Model.id">Add Talk</a> |
-    <a asp-area="" asp-controller="Prayers" asp-action="Create" asp-route-id="@Model.id">Add Prayer</a>
+    <a asp-action="Details" asp-route-id="@Model.id">Back to Details</a>
 </div>

@@ -62,6 +62,28 @@ namespace SacramentPlanner.Controllers
             return View(meetingProgram);
         }
 
+        // GET: MeetingPrograms/Print/5
+        public async Task<IActionResult> Print(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var meetingProgram = await _context.Programs
+                .Include(m => m.Prayers)
+                .Include(m => m.Talks)
+                .Include(m => m.Hymns)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(m => m.id == id);
+            if (meetingProgram == null)
+            {
+                return NotFound();
+            }
+
+            return View(meetingProgram);
+        }
+
         // GET: MeetingPrograms/Create
         public IActionResult Create()
         {
