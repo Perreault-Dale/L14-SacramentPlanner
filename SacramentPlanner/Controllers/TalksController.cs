@@ -60,7 +60,7 @@ namespace SacramentPlanner.Controllers
             {
                 _context.Add(talk);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "MeetingPrograms");
             }
             return View(talk);
         }
@@ -111,7 +111,7 @@ namespace SacramentPlanner.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "MeetingPrograms");
             }
             return View(talk);
         }
@@ -142,7 +142,7 @@ namespace SacramentPlanner.Controllers
             var talk = await _context.Talks.SingleOrDefaultAsync(m => m.id == id);
             _context.Talks.Remove(talk);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "MeetingPrograms");
         }
 
         private bool TalkExists(int id)

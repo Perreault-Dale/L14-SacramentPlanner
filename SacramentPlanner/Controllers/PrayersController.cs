@@ -60,7 +60,7 @@ namespace SacramentPlanner.Controllers
             {
                 _context.Add(prayer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "MeetingPrograms");
             }
             return View(prayer);
         }
@@ -111,7 +111,7 @@ namespace SacramentPlanner.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "MeetingPrograms");
             }
             return View(prayer);
         }
@@ -142,7 +142,7 @@ namespace SacramentPlanner.Controllers
             var prayer = await _context.Prayers.SingleOrDefaultAsync(m => m.id == id);
             _context.Prayers.Remove(prayer);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "MeetingPrograms");
         }
 
         private bool PrayerExists(int id)
